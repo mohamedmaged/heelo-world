@@ -93,7 +93,7 @@ public:
 					break;
 				if (x.length() == 1)
 					newbill = true;
-				// cout << x << endl;
+				//cout << x << endl;
 				int z = 0;
 				for (int i = 0; i < x.length(); i++)
 				{

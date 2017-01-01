@@ -11,7 +11,7 @@ int year;
 date (int d=0,int m=0,int y=0)
 	{
 		day =d;
-		m=month;
+		month=m;
 		year=y;
 	}
 	void setday (int d){

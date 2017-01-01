@@ -9,8 +9,9 @@ using namespace std;
 void main()
 {
 	stock mystock;
+	mystock.read();
 	bills mybills;
-
+	mybills.read();
 	while(1)
 	{
 		int k;
@@ -71,12 +72,14 @@ void main()
 						cout << "1- " << "PAY" << endl;
 						cout << "2- " << "EDIT" << endl;
 						cout << "3- " << "delete item " << endl;
-						cout << "4- " << "cancel all bill" << endl;
+						cout << "4- " << "add aother item" << endl;
+						cout << "5- " << "cancel all bill" << endl;
 						cin >> y;
 						if (y == 1)
 						{
 							mystock.save();
 							mybills.addbill(c);
+							mybills.save();
 							break;
 						}
 						if (y == 2)
@@ -116,11 +119,38 @@ void main()
 							mystock.additem(c.getitem(y - 1));
 							c.deleteitem(y - 1);
 						}
-						if (y == 4)
+						if (y == 5)
 						{
 							break;
 						}
+						if (y == 4)
+						{
+							mystock.check();
+							mystock.customerdisplay();
+							cin >> x;
+							cout << "Please enter the qunatity of the item" << endl;
+							cin >> y;
+							while (mystock.getitem(x - 1).getquantity()< y || y<0 || x>mystock.getn() + 1)
+							{
+								if (x > mystock.getn() + 1)
+								{
+									cout << "wrong item pressed" << endl;
+								}
+								else {
+									if (mystock.getitem(x - 1).getquantity() == y)
+										break;
+									cout << "WE ARE SORRY we don't have that quantity  " << endl;
+									cout << "the quantity of this item in the stock is :" << mystock.getitem(x - 1).getquantity() << endl;
+								}
+								cin >> y;
+							}
+							mystock.getitem(x - 1).changequantity(-1 * y);
+							item n = mystock.getitem(x - 1);
+							n.setquantity(y);
+							c.additem(n);
+						}
 					}
+					mystock.save();
 					break;
 				}
 			}
@@ -128,38 +158,87 @@ void main()
 		} 
 		if (k == 2)
 		{
+			while (1)
+			{
 
-		}
-		if (k == 3)
-		{
+				int y;
+				cout << setw(40) << "STOCK -TAP (WELCOME )" << endl;
+				cout << "please choose one of the following  : " << endl << endl;
+				cout << "1- " << "add new items to stock " << endl;
+				cout << "2- " << "display stock" << endl;
+				cout << "3- " << "delete item from stock " << endl;
+				cin >> y;
+				if (y == 1)
+				{
+					int  id;
+					string name;
+					string manf;
+					string type;
+					float price;
+					bool edible;
+					int quantity;
+					int z;
+					int m;
+					int d;
+					cout << " enter id : ";
+					cin >> id;
+					cout << endl << "enter name : ";
+					cin >> name;
+					cout << endl << "enter manf : ";
+					cin >> manf;
+					cout << endl << "enter type :";
+					cin >> type;
+					cout << endl << "enter price : ";
+					cin >> price;
+					cout << endl << "Quantity is :";
+					cin >> quantity;
+					cout << endl << "is it edible (0,1) :";
+					cin >> edible;
+					if (edible)
+					{
+						cout << endl << "expire year  :";
+						cin >> z;
+						cout << endl << "expire month : ";
+						cin >> m;
+						cout << endl << "expire day :";
+						cin >> d;
+						date e(d,m,z);
+						item s(id, name, manf, type, price, quantity, e);
+						mystock.additem(s);
+						mystock.save();
 
+					}
+					else
+					{
+						item s(id, name, manf, type, price, quantity);
+						mystock.additem(s);
+						mystock.save();
+					}
+				}
+				if (y == 2)
+				{
+					mystock.check();
+					mystock.display();
+				}
+				if (y == 3)
+				{
+					int x;
+					cout << " please enter the number of the item you want to delete " << endl;
+					mystock.check();
+					mystock.display();
+					cin >> x;
+					mystock.deleteitem(x - 1);
+					mystock.save();
+				}
+			}
+			if (k == 3)
+			{
+				cout << setw(40) << "STOCK -TAP (WELCOME )" << endl;
+
+			}
 		}
 	}
-	/*stock mystock;
-	mystock.read("test.csv");
-	mystock.display();
-	bills mybills;
-	//mybills.read("fsdf ");
-	item s(1545, "pepsi", "pepsi", "drinks", 20, 2);
-	item q(15, "chepsi", "chepsi", "potateos", 30, 2);
-	item t(5452, "jelly", "dream", "deserts", 20, 30);
-	bill b;
-	b.additem(s);
-	b.additem(q);
-	bill c;
-	b.additem(t);
-	c.additem(t);
-	c.additem(s);
-	mybills.addbill(b);
-	mybills.addbill(c);
-	mybills.display();
 	mybills.save();
-	/*mystock.additem(s);
-	mystock.additem(q);
-	mystock.additem(t);
-mystock.deleteitem(1);
-	mystock.display();
-	mystock.save("test.csv");*/
-	
+	mystock.save();
 	system("pause");
 }

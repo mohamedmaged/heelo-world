@@ -10,6 +10,19 @@ class stock:public bill
 private :
 
 public :
+	 void display()
+	{
+		cout << " id " << "name " << "\t" << "price " << "\t" << "quantity " << endl;
+		item *currentitem = bill::header;
+		for (int i = 0; i < n; i++)
+		{
+			if (currentitem->getedib())
+				cout << setw(5) << i + 1 << " - " << currentitem->getname() << "\t" << currentitem->getprice() << "\t" <<currentitem->getquantity()<<"\t"<< currentitem->getexp().getyear() << "/" << currentitem->getexp().getmonth() << "/" << currentitem->getexp().getday() << endl;
+			else
+				cout << setw(5) << i + 1 << " - " << currentitem->getname() << "\t" << currentitem->getprice() << "\t" << currentitem->getquantity() << endl;
+			currentitem = currentitem->next;
+		}
+	}
 	void customerdisplay()
 	{
 		cout << " index " << "name " << "\t" << "price " <<  endl;
@@ -25,7 +38,6 @@ public :
 			i++;
 		}
 	}
-	
 	bool save ()
 	{
 		ofstream file("stock.csv");

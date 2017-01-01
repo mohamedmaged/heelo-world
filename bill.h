@@ -107,7 +107,7 @@ class bill
 		}
 		return x;
         }
-		void display()
+		virtual void display()
 		{
 			float total=0;
 			cout << " id " << "name " << "\t" << "price " << "\t" << "quantity " << endl;
