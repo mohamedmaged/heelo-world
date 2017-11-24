@@ -117,6 +117,6 @@ item(int i,string n,string man,string t,float p,int q=0)
 	}
 
 
-};
+};;
 
 #endif // ITEM_H

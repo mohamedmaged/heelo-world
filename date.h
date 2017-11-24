@@ -38,5 +38,5 @@ date (int d=0,int m=0,int y=0)
 		return year;
 	}
 };
-
+;;;;;;
 #endif // DATE_H
