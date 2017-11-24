@@ -179,6 +179,6 @@ void totalcost()
 			currentitem = currentitem->next;
 	}
 }
-};;
+};
 
 #endif // BILL_H
